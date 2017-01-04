@@ -14,54 +14,51 @@
   </head>
 
 
-<body class="m0">
+<body class="m0 bg-black">
   <nav class="m0 p2 clearfix fit bg-silver">
     <span class="red">
     <ul class="list-reset">
         <li class="inline-block mr1 bold"><a href="#">Home</a></li>
-        <li method="POST" action="/moby" class="inline-block mr1 text-decoration-none"><a href="/moby">Moby's dance party</a></li>
+        <li class="inline-block mr1 text-decoration-none"><a href="about">About</a></li>
     </ul>
    </span>
   </nav>
   
-    <header class="center mt0 px3 py2 bg-center bg-cover">
-        <div id="loading">
-          <p id="load">Your results are loading!</p>
-          <img id="bar" src="/static/loadingimage.gif" alt="progress bar">
-      </div>
-        <div id="content">
-          <h1 class="p2 bold center">your sound</h1>
-          <div class="col-8 p2 center clearfix mx-auto">
-              <form method="POST" action="/">
-                  <label for="search">Search for a song</label>
-                  <input id="search" type="text" class="input" name="text">
-                  <button class="btn btn-primary">Go</button>
-              </form>
-          </div>
-        </div>
+    <div class="mx-auto center">
+    	{% for key,value in songdict.iteritems() %}
+    	<iframe src="https://embed.spotify.com/?uri={{ value[0] }}" width="940" frameborder="0" allowtransparency="true" class="m0 mx-auto center"></iframe>
+    	{% endfor %}
+    	<!--
+        <table class="center mx-auto">
+            <thead>
+                <tr>
+                    <th>Song</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key,value in songdict.iteritems() %}
+                <tr class="p0 m0">
+                  
+                    <td><iframe src="https://embed.spotify.com/?uri={{ value[0] }}" width="340" frameborder="0" allowtransparency="true"></iframe></td>
+                    <!--<td>{{ value[1] }}</td>-->
+
+                <!--</tr>
+                {% endfor %}
+                
+            </tbody>
         
-    </header>
-  <!--<div>{{data}}</div>-->
-
-  <!--<div>
-    {% for n in data %}
-    <div>{{n}}</div>
-    {% endfor %}
-  </div>-->
-
-<!--<p><a href="another">Go to the other page</a></p>-->
+        </table>-->
+    </div>
+    
     
     
    
 
     <footer class="fixed bottom-0 left-0 right-0 bg-silver p2 center">made with <i class="fa fa-heart" aria-hidden="true"></i>
         by <a href="http://www.github.com/edvarderiksson">EE</a> + <a href="http://www.github.com/andreasimes">AS</a> </footer>
-      <script
-    src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
-    <script type="text/javascript">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    	<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+        <script type="text/javascript">
       function loading(){
             $("#loading").show();
             $("#content").hide();       
@@ -71,7 +68,7 @@
       // Let's define a command.
       var commands = {
         'hello': function() { alert('Hello world!'); },
-        'play': function() {
+        'play that seventys song': function() {
            //alert('play'); 
            loading();
            $.ajax({
