@@ -14,6 +14,9 @@ import urllib
 import ast
 from unicodedata import normalize
 
+with open('data.json') as json_data_file:
+	data = json.load(json_data_file)
+
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates') # creates paths for Jinja templates in a templates folder
 app = Flask(__name__, template_folder=tmpl_dir)
@@ -36,8 +39,8 @@ def index():
 
 
 
-CLIENT_ID = ""
-CLIENT_SECRET = ""
+CLIENT_ID = data['spotify']['id']
+CLIENT_SECRET = data['spotify']['secret']
 
 @app.route("/results/<query>") # results handling
 #@app.route("/moby/<query>")
