@@ -5,9 +5,11 @@ body {
 }
 
 body#mobydanceparty{
-    width: 100vh;
-    height: 100vh;
-    background: radial-gradient(red, purple, rgb(30, 144, 255));
+    background: radial-gradient(red, purple, blue);
+}
+
+body#mobybody{
+    background: radial-gradient(pink, red, purple);
 }
 
 #loading {
@@ -15,8 +17,3 @@ body#mobydanceparty{
     cursor: wait;
 }
 
-#caption {
-    vertical-align: middle;
-    top: 50;
-    bottom: 50;
-}

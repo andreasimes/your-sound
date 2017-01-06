@@ -4,7 +4,6 @@
   <head>
     <link href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" rel="stylesheet">
     <link rel=stylesheet href="https://s3-us-west-2.amazonaws.com/colors-css/2.2.0/colors.min.css">
-    <link href="https://unpkg.com/basscss-colors@2.0.2/css/colors.css" rel="stylesheet">
     <link href="https://unpkg.com/basscss-btn@1.1.1/css/btn.css" rel="stylesheet">
     <link href="https://unpkg.com/basscss-btn-primary@1.1.0/css/btn-primary.css" rel="stylesheet">
     <link href="https://unpkg.com/basscss-background-images@0.1.1/css/background-images.css" rel="stylesheet">
@@ -14,18 +13,22 @@
   </head>
 
 
-<body id="mobydanceparty" class="m0" style="background: radial-gradient(red, purple, blue);">
+<body id="mobydanceparty" class="m0">
   <nav class="m0 p2 clearfix fit bg-silver">
-
+    <span class="red">
     <ul class="list-reset">
         <li class="inline-block mr1 bold"><a href="#">Home</a></li>
-        <li class="inline-block mr1 text-decoration-none"><a href="about">Moby's dance party</a></li>
+        <li method="POST" action="/moby" class="inline-block mr1 text-decoration-none"><a href="/moby">Moby's dance party</a></li>
     </ul>
-
+   </span>
   </nav>
+    <div id="loading" class="center mx-auto" style="margin-top: 400px;">
+          <p id="load" class="white">Your results are loading!</p>
+          <img id="bar" src="/static/loadingimage.gif" alt="progress bar">
+      </div>
   
-    <div class="col-8 mx-auto center white align-baseline">
-    	<div id="caption" style="margin-top: 300px; top: 50; bottom: 50;"><i class="fa fa-microphone fa-2x" aria-hidden="true"></i> tell me to <br><h2>"play that '70s song"</h2></div>
+    <div class="mx-auto center white align-baseline">
+    	<div id="caption" style="margin-top: 300px; top: 50; bottom: 50;"><i class="fa fa-microphone fa-2x" aria-hidden="true"></i><br> tell me to <br><h2>"play something happy"</h2></div>
     </div>
     
     
@@ -43,13 +46,43 @@
         }
 
     if (annyang) {
+        
+        var happy = function(){
+            alert("yoyo!");
+        }
+        
+        var play = function(tag) {
+            $('body').attr("style", "background: radial-gradient(pink, red, purple) !important");
+            loading();
+            $.ajax({
+            type: "POST",
+            url: "/mobyparty/"+tag,
+            //data: { "query": tag}
+          }).done(function(data, textStatus, jqXHR) {
+            console.log( "success" );
+            document.write(data);
+          });
+        }  
+        
       // Let's define a command.
       var commands = {
-        'hello': function() { alert('Hello world!'); },
-        'play that seventys song': function() {
-           //alert('play'); 
-           loading();
-           $.ajax({
+        'play some *tag': play,
+        'happy': happy
+          
+        /*'hello': function() {
+            console.log('before');
+            console.log($('body').css("background"));
+            $('body').attr("style", "background: radial-gradient(pink, red, purple) !important");
+            console.log('after');
+            console.log($('body').css("background"));
+            alert('Yoyoyo!'); },
+        
+         
+        'play': function() {
+           //alert('play');
+            $('body').attr("style", "background: radial-gradient(pink, red, purple) !important");
+            loading();
+            $.ajax({
             type: "POST",
             url: "/moby",
             data: { param: ""}
@@ -58,11 +91,12 @@
             document.write(data);
           });
           //console.log(jqXHR.responseText);
-        }
+        }*/
+
       };
-
-
-
+       
+      
+        annyang.debug();
       // Add our commands to annyang
       annyang.addCommands(commands);
 

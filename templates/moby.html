@@ -14,19 +14,20 @@
   </head>
 
 
-<body class="m0 bg-black">
+<body id="mobybody" class="m0" style="background:radial-gradient(pink, red, purple);">
   <nav class="m0 p2 clearfix fit bg-silver">
     <span class="red">
     <ul class="list-reset">
-        <li class="inline-block mr1 bold"><a href="#">Home</a></li>
-        <li class="inline-block mr1 text-decoration-none"><a href="about">About</a></li>
+        <li class="inline-block mr1 bold"><a href="/">Home</a></li>
+        <li class="inline-block mr1 text-decoration-none"><a href="about">Moby's dance party</a></li>
     </ul>
    </span>
   </nav>
   
+  	<h1 class="center mx-auto my3">time to get groovy!</h1>
     <div class="mx-auto center">
     	{% for key,value in songdict.iteritems() %}
-    	<iframe src="https://embed.spotify.com/?uri={{ value[0] }}" width="940" frameborder="0" allowtransparency="true" class="m0 mx-auto center"></iframe>
+    	<iframe src="https://embed.spotify.com/?uri={{ value[0] }}" width="940" height="90" frameborder="0" allowtransparency="true" class="p0 m0 mx-auto center"></iframe>
     	{% endfor %}
     	<!--
         <table class="center mx-auto">
@@ -67,7 +68,11 @@
     if (annyang) {
       // Let's define a command.
       var commands = {
-        'hello': function() { alert('Hello world!'); },
+        'hello': function() {
+        	$('body').css('background-color','blue !important');
+        	console.log($('body').css());
+        	alert('Hello world!');
+        },
         'play that seventys song': function() {
            //alert('play'); 
            loading();
@@ -84,7 +89,6 @@
       };
 
 
-
       // Add our commands to annyang
       annyang.addCommands(commands);
 
@@ -94,6 +98,7 @@
 
 
     </script>
+    <style></style>
 </body>
 
 
