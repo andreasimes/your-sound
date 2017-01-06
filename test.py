@@ -36,8 +36,8 @@ def index():
 
 
 
-CLIENT_ID = "78f7c13de8b44da2b92b70e2235cb316"
-CLIENT_SECRET = "4e64b9b4da8d4276ac86e1de7c994f3a"
+CLIENT_ID = ""
+CLIENT_SECRET = ""
 
 @app.route("/results/<query>") # results handling
 #@app.route("/moby/<query>")
